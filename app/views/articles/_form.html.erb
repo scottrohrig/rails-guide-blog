@@ -1,0 +1,45 @@
+<style>
+* {font-family: 'arial', san-serif;}
+div {
+  width: 20em;
+  margin-bottom: 1ch;
+  display: flex;
+  gap: 1ch;
+  align-items: center;
+  justify-content: space-between;
+}
+input, textarea, select {
+  width: 30ch;
+  padding: 4px 8px;
+}
+input[type=submit] {
+  margin: auto;
+}
+</style>
+
+<%= form_with model: article do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    </div>
+    <% article.errors.full_messages_for(:title).each do |message| %>
+      <div style="color: red;"><%= message %></div>
+    <% end %>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </div>
+  <% article.errors.full_messages_for(:body).each do |message| %>
+    <div style="color: red;"><%= message %></div>
+  <% end %>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

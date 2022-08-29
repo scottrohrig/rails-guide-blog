@@ -1,0 +1,16 @@
+
+
+<li >
+  <span class='article-title'>
+    <%= link_to article.title, article %>
+  </span>
+  <a href="/articles/<%= article.id %>/edit" >
+  ✎
+  </a>
+  <span class='delete'>
+    <%= link_to "X", article_path(article), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Confirm delete?"
+      } %>
+  </span>
+</li>

@@ -1,0 +1,56 @@
+<style>
+* {font-family: 'arial', san-serif;}
+ul {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  list-style: none;
+}
+a {text-decoration: none;}
+form p {
+  width: 20em;
+  margin-bottom: 1ch;
+  display: flex;
+  gap: 1ch;
+  align-items: center;
+  justify-content: space-between;
+}
+input, textarea, select {
+  width: 30ch;
+  padding: 4px 8px;
+}
+input[type=submit] {
+  margin: auto;
+}
+li a {
+  color: black;
+  font-size: 26px;
+}
+.delete a {
+  color: red;
+  font-weight: 900;
+}
+</style>
+
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+<ul>
+  <li><a href="/">⌂</a></li>
+  <li class='edit' ><%= link_to "✎", edit_article_path(@article) %></li>
+  <li class='delete'>
+  <%= link_to "X", article_path(@article) , data: {
+    turbo_method: :delete,
+    turbo_confirm: "Confirm delete?"
+    } %></li>
+</ul>
+<hr>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
+<hr>
+<h2>Comments <span><%= @article.comments.length %></span></h2>
+<%= render @article.comments[0, @article.comments.length-1] %>
